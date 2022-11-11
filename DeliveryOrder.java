@@ -1,4 +1,4 @@
-public class DeliveryOrder {
+public class DeliveryOrder extends Order {
     private String customer, address, phone;
 
     public DeliveryOrder(String customer, String address, String phone) {
