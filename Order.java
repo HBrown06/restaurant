@@ -37,7 +37,7 @@ public class Order {
     }
 
     public double getTotal(){
-        return 0.0;
+        return 0.0; //TODO
     }
 
     public String toString(){

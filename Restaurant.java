@@ -22,12 +22,12 @@ public class Restaurant {
             ans = sc.nextInt();
             sc.nextLine();
             
-            switch(ans){ // This is like using a bunch of if statements
+            switch(ans){ // This is like using a bunch of if statements. Either way is good
                 case 1:
-                System.out.println("TableOrder code goes here");//TODO 
+                System.out.println("TableOrder code goes here");//TODO See code for option 3
                 break;
                 case 2:
-                System.out.println("TakeoutOrder goes here"); //TODO 
+                System.out.println("TakeoutOrder goes here"); //TODO See code for option 3
                 break;
                 case 3:
                 System.out.print("Customer Name: ");
@@ -45,11 +45,19 @@ public class Restaurant {
                 case 4:
                 ans= 0;
                 while(ans <1 || ans > 3){
-                    System.out.println("Sort by:  1.Order number 2)Type 3)Status ");
+                    System.out.println("Sort by:  1.Order number 2.Type 3.Status ");
                     ans = sc.nextInt();
                     sc.nextLine(); 
                 }    
                 listOrders(ans);
+                break;
+                case 5:
+                //TODO 
+                /* Update status
+                 * Add dish
+                 * Remove dish  
+                 * Cancel order
+                 */
                 break;
             }
         }
@@ -118,7 +126,7 @@ public class Restaurant {
             
 
         }else if(n == 3){//Print orders by status
-
+            //TODO see code for option 2.This is similar 
         }
     }
 }
