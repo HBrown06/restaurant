@@ -110,7 +110,9 @@ public class Restaurant {
 
     public static void listOrders(int n){
         if(n == 1){//print orders by order number
-
+            for(Order o : orders){
+                System.out.println(o.getOrderNumber());
+            }
         }else if(n == 2){//Print Orders by orderType
             HashSet<String> orderTypes = new HashSet<>();
             for(Order o: orders)//Find all the order types
@@ -126,7 +128,18 @@ public class Restaurant {
             
 
         }else if(n == 3){//Print orders by status
-            //TODO see code for option 2.This is similar 
+            HashSet<Integer> statuses = new HashSet<>();
+            for(Order o : orders){
+                statuses.add(o.getIndex());
+            }
+
+            for(int status : statuses){
+                for(Order o : orders){
+                    if(o.getIndex() == status){
+                        System.out.println(o);
+                    }
+                }
+            }
         }
     }
 }

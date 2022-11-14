@@ -14,7 +14,11 @@ public class TableOrder extends Order {
         this.tableNumber = tableNumber;
     }
 
-    //TODO toString
+    public String toString(){
+
+        return "Table Number: " + tableNumber;
+
+    }
 
 
 }

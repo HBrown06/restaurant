@@ -35,8 +35,4 @@ public class DeliveryOrder extends Order {
     public String toString(){
         return super.toString()+customer+" "+address+" "+phone;
     }
-    
-
-
-    
 }
