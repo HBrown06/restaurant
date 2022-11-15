@@ -21,12 +21,8 @@ public class TakeoutOrder extends Order{
         this.customer = customer;
     }
 
-    public void setCurrentStatus(){
-
-    }
-
     public String toString(){
-        return "Customer: " + customer;
+        return "Takeout Order, Customer: " + customer + " Order Number: " + this.getOrderNumber();
     }
 
 }

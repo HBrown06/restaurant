@@ -24,6 +24,12 @@ public class Order {
     public ArrayList<Food> getDishes() {
         return dishes;
     }
+    public void addDish(Food f){
+        dishes.add(f);
+    }
+    public void removeDish(Food f){
+        dishes.remove(f);
+    }
     public void setDishes(ArrayList<Food> dishes) {
         this.dishes = dishes;
     }
@@ -59,7 +65,7 @@ public class Order {
     }
 
     public String toString(){
-        return "Ordder No:"+orderNumber+" Status: "+status+" Number of Dishes:"+dishes.size()+" Total: "+getTotal()+" ";
+        return "Order No:"+orderNumber+" Status: "+status+" Number of Dishes:"+dishes.size()+" Total: "+getTotal()+" ";
     }
     
 }

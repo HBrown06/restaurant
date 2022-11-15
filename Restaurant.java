@@ -24,41 +24,86 @@ public class Restaurant {
             
             switch(ans){ // This is like using a bunch of if statements. Either way is good
                 case 1:
-                System.out.println("TableOrder code goes here");//TODO See code for option 3
-                break;
+                    System.out.println("Table Number: ");//TODO See code for option 3
+                    int num = sc.nextInt();
+                    TableOrder t = new TableOrder(num);
+                    ArrayList<Food> tDishes = getDishes();
+                    t.setDishes(tDishes);
+                    orders.add(t);
+                    break;
                 case 2:
-                System.out.println("TakeoutOrder goes here"); //TODO See code for option 3
-                break;
+                    System.out.println("Customer Name: "); //TODO See code for option 3
+                    String name = sc.nextLine();
+                    TakeoutOrder tOrder = new TakeoutOrder(name);
+                    ArrayList<Food> tODishes = getDishes();
+                    tOrder.setDishes(tODishes);
+                    orders.add(tOrder);
+                    break;
                 case 3:
-                System.out.print("Customer Name: ");
-                String customer = sc.nextLine();
-                System.out.print("Address: ");
-                String addr =sc.nextLine();
-                System.out.print("Phone: ");
-                String phone = sc.nextLine();
-                ArrayList<Food> dishes = getDishes();//This function is inside  of Restaurant
-                DeliveryOrder  o = new DeliveryOrder(customer, addr, phone);
-                o.setDishes(dishes);
-                orders.add(o);
-
-                break;
+                    System.out.print("Customer Name: ");
+                    String customer = sc.nextLine();
+                    System.out.print("Address: ");
+                    String addr =sc.nextLine();
+                    System.out.print("Phone: ");
+                    String phone = sc.nextLine();
+                    ArrayList<Food> dishes = getDishes();//This function is inside  of Restaurant
+                    DeliveryOrder  o = new DeliveryOrder(customer, addr, phone);
+                    o.setDishes(dishes);
+                    orders.add(o);
+                    break;
                 case 4:
-                ans= 0;
-                while(ans <1 || ans > 3){
-                    System.out.println("Sort by:  1.Order number 2.Type 3.Status ");
-                    ans = sc.nextInt();
-                    sc.nextLine(); 
-                }    
-                listOrders(ans);
-                break;
+                    ans= 0;
+                    while(ans <1 || ans > 3){
+                        System.out.println("Sort by:  1.Order number 2.Type 3.Status ");
+                        ans = sc.nextInt();
+                        sc.nextLine();
+                    }    
+                    listOrders(ans);
+                    break;
                 case 5:
-                //TODO 
-                /* Update status
-                 * Add dish
-                 * Remove dish  
-                 * Cancel order
-                 */
-                break;
+                    ans = -1;
+                    while(ans != 0){
+                        
+                        System.out.println("1. Update Status");
+                        System.out.println("2. Add Dish");
+                        System.out.println("3. Remove Dish");
+                        System.out.println("4. Cancel Order");
+                        System.out.println("0. Exit");
+                        System.out.println("Enter Choice: ");
+
+                        int choice = sc.nextInt();
+
+                        switch(choice){
+                            case 1:
+                                listOrders(1);
+                            
+                            case 2:
+                                listOrders(1);
+                                int order = sc.nextInt();
+                                for(int i = 0;i<menu.size(); i++){
+                                    System.out.println(i + menu.get(i).getName());
+                                }
+                                int food = sc.nextInt();
+                                orders.get(order).addDish(menu.get(food));
+                            case 3:
+                                listOrders(1);
+                                order = sc.nextInt();
+                                for(int i = 0;i<menu.size(); i++){
+                                    System.out.println(i + menu.get(i).getName());
+                                }
+                                food = sc.nextInt();
+                                orders.get(order).removeDish(menu.get(food));
+                            case 4:
+                                listOrders(1);
+                                System.out.println("Which order do you want to cancel?");
+                                int ans2 = sc.nextInt();
+                                orders.remove(ans2);
+                            case 0:
+                                break;
+
+                        }
+                    }
+                    break;
             }
         }
         
@@ -82,7 +127,7 @@ public class Restaurant {
             ans = sc.nextInt();
             sc.nextLine();
             if(ans > 0 && ans <=menu.size()){
-                dishes.add(menu.get(ans));
+                dishes.add(menu.get(ans-1));
             }
             else if(ans== -1){
                 break;
@@ -111,7 +156,7 @@ public class Restaurant {
     public static void listOrders(int n){
         if(n == 1){//print orders by order number
             for(Order o : orders){
-                System.out.println(o.getOrderNumber());
+                System.out.println(o);
             }
         }else if(n == 2){//Print Orders by orderType
             HashSet<String> orderTypes = new HashSet<>();
