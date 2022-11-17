@@ -24,7 +24,7 @@ public class Restaurant {
             
             switch(ans){ // This is like using a bunch of if statements. Either way is good
                 case 1:
-                    System.out.println("Table Number: ");//TODO See code for option 3
+                    System.out.println("Table Number: ");
                     int num = sc.nextInt();
                     TableOrder t = new TableOrder(num);
                     ArrayList<Food> tDishes = getDishes();
@@ -32,7 +32,8 @@ public class Restaurant {
                     orders.add(t);
                     break;
                 case 2:
-                    System.out.println("Customer Name: "); //TODO See code for option 3
+
+                    System.out.println("Customer Name: ");
                     String name = sc.nextLine();
                     TakeoutOrder tOrder = new TakeoutOrder(name);
                     ArrayList<Food> tODishes = getDishes();
@@ -76,34 +77,49 @@ public class Restaurant {
                         switch(choice){
                             case 1:
                                 listOrders(1);
-                            
+                                System.out.println("Choose an order: ");
+                                int order = sc.nextInt();
+                                System.out.println(Order.getStatuses());
+
+                                System.out.println("Choose the order status: ");
+                                int stat = sc.nextInt();
+                                orders.get(order).setStatus(Order.getStatArrByIndex(stat));
+                                break;
                             case 2:
                                 listOrders(1);
-                                int order = sc.nextInt();
-                                for(int i = 0;i<menu.size(); i++){
-                                    System.out.println(i + menu.get(i).getName());
-                                }
-                                int food = sc.nextInt();
-                                orders.get(order).addDish(menu.get(food));
-                            case 3:
-                                listOrders(1);
+                                System.out.println("Choose an order: ");
                                 order = sc.nextInt();
                                 for(int i = 0;i<menu.size(); i++){
-                                    System.out.println(i + menu.get(i).getName());
+                                    System.out.println(i + ") " + menu.get(i).getName());
                                 }
+                                System.out.println("Choose a food: ");
+                                int food = sc.nextInt();
+                                orders.get(order).addDish(menu.get(food));
+                                break;
+                            case 3:
+                                listOrders(1);
+                                System.out.println("Choose an order: ");
+                                order = sc.nextInt();
+                                for(int i = 0;i<orders.get(order).getDishes().size(); i++){
+                                    System.out.println(i + ") " + orders.get(order).getDishes().get(i));
+                                }
+                                System.out.println("Choose a food: ");
                                 food = sc.nextInt();
                                 orders.get(order).removeDish(menu.get(food));
+                                break;
                             case 4:
                                 listOrders(1);
                                 System.out.println("Which order do you want to cancel?");
                                 int ans2 = sc.nextInt();
                                 orders.remove(ans2);
+                                break;
                             case 0:
                                 break;
 
                         }
+                        break;
                     }
-                    break;
+                    
             }
         }
         
@@ -119,15 +135,15 @@ public class Restaurant {
     public static ArrayList<Food> getDishes(){
         ArrayList<Food>  dishes =new ArrayList<>();
         int ans = 1;
-        while(ans !=0){
+        while(ans >= 0){
             for(int i = 0; i < menu.size();i++){
-                System.out.println(i+1+" "+menu.get(i));
+                System.out.println(i+" "+menu.get(i));
             }
             System.out.println("Enter Choice (-1 to exit): ");
             ans = sc.nextInt();
             sc.nextLine();
-            if(ans > 0 && ans <=menu.size()){
-                dishes.add(menu.get(ans-1));
+            if(ans >= 0 && ans <=menu.size()){
+                dishes.add(menu.get(ans));
             }
             else if(ans== -1){
                 break;
@@ -155,35 +171,53 @@ public class Restaurant {
 
     public static void listOrders(int n){
         if(n == 1){//print orders by order number
-            for(Order o : orders){
-                System.out.println(o);
+            int i = 0;
+            if(orders.size() > 0){
+                for(Order o : orders){
+                    System.out.println(i + ") " + o);
+                    i++;
+                }
+            }else{
+                System.out.println("No orders.");
             }
         }else if(n == 2){//Print Orders by orderType
-            HashSet<String> orderTypes = new HashSet<>();
-            for(Order o: orders)//Find all the order types
-                orderTypes.add(getType(o));
-        
-            for(String orderType:  orderTypes){//Loop through the order types
-                for(Order o: orders){//For each order type print the oders that belong to that type
-                    if(getType(o).equals(orderType)){
-                        System.out.println(o);
+            int i = 0;
+            if(orders.size() > 0){
+                HashSet<String> orderTypes = new HashSet<>();
+                for(Order o: orders)//Find all the order types
+                    orderTypes.add(getType(o));
+            
+                for(String orderType:  orderTypes){//Loop through the order types
+                    for(Order o: orders){//For each order type print the oders that belong to that type
+                        if(getType(o).equals(orderType)){
+                            System.out.println(i + ") " + o);
+                            i++;
+                        }
                     }
                 }
+            }else{
+                System.out.println("No orders.");
             }
             
 
         }else if(n == 3){//Print orders by status
-            HashSet<Integer> statuses = new HashSet<>();
-            for(Order o : orders){
-                statuses.add(o.getIndex());
-            }
-
-            for(int status : statuses){
+            int i = 0;
+            if(orders.size() > 0){
+                HashSet<Integer> statuses = new HashSet<>();
                 for(Order o : orders){
-                    if(o.getIndex() == status){
-                        System.out.println(o);
+                    statuses.add(o.getIndex());
+                }
+
+                for(int status : statuses){
+                    for(Order o : orders){
+                        if(o.getIndex() == status){
+                            System.out.println(i + ")" + o);
+                            i++;
+                        }
                     }
                 }
+            }else{
+                System.out.println("No orders.");
             }
         }
     }

@@ -22,7 +22,7 @@ public class TakeoutOrder extends Order{
     }
 
     public String toString(){
-        return "Takeout Order, Customer: " + customer + " Order Number: " + this.getOrderNumber();
+        return "Takeout Order, Customer: " + customer + " " + super.toString();
     }
 
 }

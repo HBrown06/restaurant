@@ -5,7 +5,7 @@ public class Order {
     private int orderNumber,index;
     private static int totalOrders = 0;
     private String status;
-    private String[] statuses = {"Placed", "Cooking", "Ready"};
+    private static String[] statuses = {"Placed", "Cooking", "Ready"};
 
     public Order(ArrayList<Food> dishes) {
         index = 0;
@@ -58,6 +58,17 @@ public class Order {
 
         }
         return total;
+    }
+
+    public static String getStatuses(){
+        return "0) " + statuses[0] + ", " + "1) " + statuses[1] + ", " + "2) " + statuses[2];
+    }
+    public static String getStatArrByIndex(int index){
+        return statuses[index];
+    }
+
+    public void setStatus(String status){
+        this.status = status;
     }
 
     public int getIndex(){

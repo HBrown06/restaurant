@@ -16,7 +16,7 @@ public class TableOrder extends Order {
 
     public String toString(){
 
-        return "Table Order, Table Number: " + tableNumber + " Order Number: " + this.getOrderNumber();
+        return "Table Order, Table Number: " + tableNumber +" " +  super.toString();
 
     }
 
